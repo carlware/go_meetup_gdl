@@ -1,0 +1,20 @@
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	stringStream := make(chan string)
+
+	go func() {
+		time.Sleep(1 * time.Second)
+		stringStream <- "Hello world"
+	}()
+
+	fmt.Println("Waiting for the message")
+
+	message, ok := <-stringStream
+	fmt.Printf("Stream message: %s %v \n", message, ok)
+}
