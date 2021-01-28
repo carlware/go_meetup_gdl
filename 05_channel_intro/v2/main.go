@@ -9,10 +9,13 @@ func main() {
 	stringStream := make(chan string)
 
 	go func() {
-		time.Sleep(2 * time.Second)
+		defer close(stringStream)
+		time.Sleep(1 * time.Second)
 		stringStream <- "Hello world"
 	}()
 
 	fmt.Println("Waiting for the message")
-	fmt.Printf("Stream message: %s \n", <-stringStream)
+
+	message, ok := <-stringStream
+	fmt.Printf("Stream message: %s %v \n", message, ok)
 }

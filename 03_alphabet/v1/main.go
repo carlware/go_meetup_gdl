@@ -24,7 +24,6 @@ func main() {
 	}()
 
 	go func() {
-
 		for count := 0; count < 3; count++ {
 			for char := 'A'; char < 'A'+26; char++ {
 				fmt.Printf("%c ", char)
